@@ -1,0 +1,692 @@
+{
+  "initial_error": {
+    "rotation_deg": 1.2245598231427695,
+    "translation_m": 0.062397600171483554
+  },
+  "rows": [
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-cap12000-cpu.yaml",
+      "backend": "cpu",
+      "seconds": 4.779841726995073,
+      "truth_error": {
+        "rotation_deg": 0.42898659445466797,
+        "translation_m": 0.0914596180173774
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08374056735715958,
+                  "reverse": 0.08377529790933125,
+                  "total": 0.08375793263324541
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07967873598099216,
+                  "reverse": 0.07961661274305663,
+                  "total": 0.0796476743620244
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0824507809047052,
+                  "reverse": 0.08278466606887576,
+                  "total": 0.08261772348679047
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07807361666347806,
+                  "reverse": 0.07779255534169198,
+                  "total": 0.07793308600258503
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.08330756208966267,
+          "reverse": 0.0834824169276984,
+          "total": 0.08339498950868053
+        },
+        "candidate": {
+          "forward": 0.07893266385777922,
+          "reverse": 0.07893409539421045,
+          "total": 0.07893337962599484
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {}
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-cap12000-qnn.yaml",
+      "backend": "qnn",
+      "seconds": 3.7094243099563755,
+      "truth_error": {
+        "rotation_deg": 0.42999836439753963,
+        "translation_m": 0.0917933042995073
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08374056735715958,
+                  "reverse": 0.08377529790933125,
+                  "total": 0.08375793263324541
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07966462571312546,
+                  "reverse": 0.07960580364638642,
+                  "total": 0.07963521467975594
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0824507809047052,
+                  "reverse": 0.08278466606887576,
+                  "total": 0.08261772348679047
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07807988530775928,
+                  "reverse": 0.07779888744067176,
+                  "total": 0.07793938637421552
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.08330756208966267,
+          "reverse": 0.0834824169276984,
+          "total": 0.08339498950868053
+        },
+        "candidate": {
+          "forward": 0.07893793942292596,
+          "reverse": 0.07893973303196003,
+          "total": 0.078938836227443
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {
+        "backend": "qnn_htp",
+        "layout": "NCHW",
+        "init_ms": 236.10119195654988,
+        "calls": 6,
+        "forward_total_ms": 1114.5136259729043,
+        "forward_p50_ms": 20.86614299332723,
+        "geometry_backend": "cpu",
+        "self_supervised_backend": "cpu",
+        "pipeline_approved": false,
+        "context": "/home/aidlux/rbt-work/models/dst-calib/deployment-v2/eva_sb_qairt250.bin",
+        "score_method": "full_supervised"
+      }
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-cpu-1.yaml",
+      "backend": "cpu",
+      "seconds": 9.014850951964036,
+      "truth_error": {
+        "rotation_deg": 0.7090569834951826,
+        "translation_m": 0.1555040360080133
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912099827099507,
+                  "reverse": 0.07916727562120626,
+                  "total": 0.07914413694610067
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07950393943064515,
+                  "reverse": 0.08010710331027049,
+                  "total": 0.07980552137045782
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979491858067092,
+          "reverse": 0.08019099164153135,
+          "total": 0.07999295511110113
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {}
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-cpu-2.yaml",
+      "backend": "cpu",
+      "seconds": 6.4908175020245835,
+      "truth_error": {
+        "rotation_deg": 0.7090569834951826,
+        "translation_m": 0.1555040360080133
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912099827099507,
+                  "reverse": 0.07916727562120626,
+                  "total": 0.07914413694610067
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07950393943064515,
+                  "reverse": 0.08010710331027049,
+                  "total": 0.07980552137045782
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979491858067092,
+          "reverse": 0.08019099164153135,
+          "total": 0.07999295511110113
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {}
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-cpu-3.yaml",
+      "backend": "cpu",
+      "seconds": 5.529907001997344,
+      "truth_error": {
+        "rotation_deg": 0.7090569834951826,
+        "translation_m": 0.1555040360080133
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912099827099507,
+                  "reverse": 0.07916727562120626,
+                  "total": 0.07914413694610067
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07950393943064515,
+                  "reverse": 0.08010710331027049,
+                  "total": 0.07980552137045782
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979491858067092,
+          "reverse": 0.08019099164153135,
+          "total": 0.07999295511110113
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {}
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-qnn-1.yaml",
+      "backend": "qnn",
+      "seconds": 4.160117832943797,
+      "truth_error": {
+        "rotation_deg": 0.7098898777413964,
+        "translation_m": 0.15549165532332934
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912106850537745,
+                  "reverse": 0.07916799518941384,
+                  "total": 0.07914453184739564
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07948479330906184,
+                  "reverse": 0.08009144041169344,
+                  "total": 0.07978811686037765
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979478438371368,
+          "reverse": 0.08019168204696236,
+          "total": 0.07999323321533802
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {
+        "backend": "qnn_htp",
+        "layout": "NCHW",
+        "init_ms": 419.0878089866601,
+        "calls": 6,
+        "forward_total_ms": 182.94739292468876,
+        "forward_p50_ms": 25.79706348478794,
+        "geometry_backend": "cpu",
+        "self_supervised_backend": "cpu",
+        "pipeline_approved": false,
+        "context": "/home/aidlux/rbt-work/models/dst-calib/deployment-v2/eva_sb_qairt250.bin",
+        "score_method": "full_supervised"
+      }
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-qnn-2.yaml",
+      "backend": "qnn",
+      "seconds": 6.194948062009644,
+      "truth_error": {
+        "rotation_deg": 0.7098898777413964,
+        "translation_m": 0.15549165532332934
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912106850537745,
+                  "reverse": 0.07916799518941384,
+                  "total": 0.07914453184739564
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07948479330906184,
+                  "reverse": 0.08009144041169344,
+                  "total": 0.07978811686037765
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979478438371368,
+          "reverse": 0.08019168204696236,
+          "total": 0.07999323321533802
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {
+        "backend": "qnn_htp",
+        "layout": "NCHW",
+        "init_ms": 235.19359796773642,
+        "calls": 6,
+        "forward_total_ms": 2555.143822915852,
+        "forward_p50_ms": 19.137304974719882,
+        "geometry_backend": "cpu",
+        "self_supervised_backend": "cpu",
+        "pipeline_approved": false,
+        "context": "/home/aidlux/rbt-work/models/dst-calib/deployment-v2/eva_sb_qairt250.bin",
+        "score_method": "full_supervised"
+      }
+    },
+    {
+      "file": "runs/dst-deployment-opt-20261031/worker-fast-qnn-3.yaml",
+      "backend": "qnn",
+      "seconds": 6.220440569042694,
+      "truth_error": {
+        "rotation_deg": 0.7098898777413964,
+        "translation_m": 0.15549165532332934
+      },
+      "stability": {
+        "enabled": true,
+        "geometric_update_accepted": true,
+        "accuracy_verified": false,
+        "per_frame": [
+          {
+            "frame": 0,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.08440942760137923,
+                  "reverse": 0.08443127545298952,
+                  "total": 0.08442035152718438
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07912106850537745,
+                  "reverse": 0.07916799518941384,
+                  "total": 0.07914453184739564
+                }
+              }
+            ]
+          },
+          {
+            "frame": 1,
+            "iterations": [
+              {
+                "iteration": 0,
+                "accepted": true,
+                "scale": 1.0,
+                "baseline": {
+                  "forward": 0.0840363980224946,
+                  "reverse": 0.08422155495044562,
+                  "total": 0.08412897648647011
+                }
+              },
+              {
+                "iteration": 1,
+                "accepted": false,
+                "scale": 0.0,
+                "baseline": {
+                  "forward": 0.07948479330906184,
+                  "reverse": 0.08009144041169344,
+                  "total": 0.07978811686037765
+                }
+              }
+            ]
+          }
+        ],
+        "baseline": {
+          "forward": 0.0845277150305925,
+          "reverse": 0.0846932203267847,
+          "total": 0.0846104676786886
+        },
+        "candidate": {
+          "forward": 0.07979478438371368,
+          "reverse": 0.08019168204696236,
+          "total": 0.07999323321533802
+        },
+        "reason": "fixed_support_improved"
+      },
+      "evaluator": {
+        "backend": "qnn_htp",
+        "layout": "NCHW",
+        "init_ms": 219.81925499858335,
+        "calls": 6,
+        "forward_total_ms": 2771.38934697723,
+        "forward_p50_ms": 18.49402900552377,
+        "geometry_backend": "cpu",
+        "self_supervised_backend": "cpu",
+        "pipeline_approved": false,
+        "context": "/home/aidlux/rbt-work/models/dst-calib/deployment-v2/eva_sb_qairt250.bin",
+        "score_method": "full_supervised"
+      }
+    }
+  ],
+  "cpu_repeat_max_abs_matrix_delta": 0.0,
+  "cpu_median_seconds": 6.4908175020245835,
+  "qnn_repeat_max_abs_matrix_delta": 0.0,
+  "qnn_median_seconds": 6.194948062009644,
+  "cpu_qnn_pose_difference": {
+    "rotation_deg": 0.0011422706500889954,
+    "translation_m": 2.8585466427049844e-05
+  },
+  "selfsup_synthetic_error": {
+    "rotation_deg": 0.2698949635893181,
+    "translation_m": 0.029322424237065988
+  }
+}

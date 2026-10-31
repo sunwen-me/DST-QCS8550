@@ -1,0 +1,24 @@
+# KITTI odometry outdoor stereo/LiDAR training, rectified grayscale cam0.
+# Camera depth comes from image_0/image_1 stereo, never from Velodyne.
+sensors:
+  camera:
+    depth_min: 1.0
+    depth_max: 60.0
+virtual_camera:
+  height: 256
+  width: 512
+  focal: 600.0
+difference_map:
+  e_tar: 0.1
+train:
+  lr: 5.0e-4
+  weight_decay: 1.0e-4
+  epochs: 100
+  batch_size: 8
+  scheduler: onecycle
+  arch: sb
+  block_n: 5
+augmentation:
+  rot_range_deg: 5.0
+  trans_range_m: 0.5
+  axis_weights: [0.6, 0.2, 0.2]

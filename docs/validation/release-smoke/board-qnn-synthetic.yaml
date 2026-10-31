@@ -1,0 +1,74 @@
+T_cam_lidar:
+- - -0.1910330902698933
+  - -0.9745513259121271
+  - 0.11728628046301807
+  - 0.15
+- - -0.14070800883660034
+  - -0.09106476160891917
+  - -0.9858541806181835
+  - -0.05
+- - 0.971446146047826
+  - -0.20483388966678745
+  - -0.1197307937533212
+  - 0.22
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+rotation_deg:
+- -143.6259939478298
+- -76.2751107628571
+- -120.3074086407838
+translation_m:
+- 0.15
+- -0.05
+- 0.22
+final_cd: 0.007507598260417581
+mode: fast
+backend: qnn
+frames: 2
+worker_seconds: 4.375291247968562
+stability:
+  enabled: true
+  geometric_update_accepted: false
+  accuracy_verified: false
+  per_frame:
+  - frame: 0
+    iterations:
+    - iteration: 0
+      accepted: false
+      scale: 0.0
+      baseline:
+        forward: 0.018891127278503804
+        reverse: 0.006474191121465706
+        total: 0.012682659199984755
+  - frame: 1
+    iterations:
+    - iteration: 0
+      accepted: false
+      scale: 0.0
+      baseline:
+        forward: 0.018913755297521713
+        reverse: 0.006481268880776561
+        total: 0.012697512089149137
+  baseline:
+    forward: 0.018720558990166263
+    reverse: 0.006442172925710482
+    total: 0.012581365957938372
+  candidate:
+    forward: 0.01872055899016627
+    reverse: 0.006442172925710486
+    total: 0.012581365957938379
+  reason: prior_retained
+evaluator:
+  backend: qnn_htp
+  layout: NCHW
+  init_ms: 325.18095104023814
+  calls: 4
+  forward_total_ms: 33.3148849895224
+  forward_p50_ms: 7.155765517381951
+  geometry_backend: cpu
+  self_supervised_backend: cpu
+  pipeline_approved: false
+  context: /home/aidlux/dst-share-check-20261031.HOzgCc/models/dst-calib/deployment-v2/eva_sb_qairt250.bin
+  score_method: full_supervised

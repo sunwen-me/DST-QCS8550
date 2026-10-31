@@ -1,0 +1,108 @@
+{
+  "checkpoint": "/home/sw/Dev/mid/models/dst-calib/deployment-v2/best.pt",
+  "checkpoint_sha256": "b86e84d128759c25b89642df135d588b0fefc70581a4e7c477743d394fb76a44",
+  "onnx_sha256": "480011245a63bba106f8b7fe70833dbcdc7b1ae90186a970545b07d519046b8b",
+  "virtual_camera": {
+    "height": 256,
+    "width": 512,
+    "focal": 600.0
+  },
+  "input": {
+    "name": "diff_map",
+    "shape": [
+      1,
+      3,
+      256,
+      512
+    ],
+    "layout": "NCHW",
+    "dtype": "float32"
+  },
+  "output": {
+    "name": "xi",
+    "shape": [
+      1,
+      6
+    ],
+    "units": "axis-angle radians, translation meters"
+  },
+  "export_change": "exact separable adaptive-average bins; export itself does not train; see checkpoint provenance",
+  "pytorch_onnx_max_abs_errors": [
+    1.7881393432617188e-07,
+    4.470348358154297e-08,
+    1.1175870895385742e-07
+  ],
+  "sample_count": 3,
+  "training_experiment": {
+    "arguments": {
+      "checkpoint": "runs/dst-deployment-opt-20261031/full-v1/best_candidate.pt",
+      "data_root": "/home/sw/DST/runs/kitti_odometry_2x/prepared",
+      "config": "runs/dst-kitti-checkpoint-smoke-20261031/config.yaml",
+      "out": "runs/dst-deployment-opt-20261031/full-v2-1152",
+      "epochs": 18,
+      "samples_per_frame": 4,
+      "train_per_session": 0,
+      "val_per_session": 0,
+      "batch_size": 8,
+      "workers": 2,
+      "lr": 1e-05,
+      "seed": 20261103,
+      "device": "cuda",
+      "eval_every": 3,
+      "replay_frames": 96,
+      "head_only": false
+    },
+    "baseline_sha256": "6d13f32931e69f8afac236522457b0056500ff10222640099432a36ef477685c",
+    "methodology": "engineering normalized residual loss; not original paper equation16",
+    "sampling": "ceil-stride caps 12000/24000/60000/full; identity/small/medium/large equally sampled",
+    "bn": "running statistics frozen",
+    "test_data_used": false,
+    "auto_backend_approved": false,
+    "live_sensor_accuracy_verified": false,
+    "train_sessions": [
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/00",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/01",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/02",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/03",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/04",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/05",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/06",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/07",
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/08"
+    ],
+    "validation_sessions": [
+      "/home/sw/DST/runs/kitti_odometry_2x/prepared/val/09"
+    ],
+    "code_sha256": "c8fa32d9f962505b3363f33adf5f513bffd548611ce8812f9c53dc63710cec0d"
+  },
+  "selection": "raw_development_trajectory_score",
+  "selected_epoch": 12,
+  "pipeline_validation": {
+    "auto_backend_approved": false,
+    "htp_execution_verified": true,
+    "live_sensor_accuracy_verified": false,
+    "full_fast_status": "native HTP and 12 saved KITTI windows executed; numerical/accuracy acceptance NOT passed; not live sensor validation",
+    "evidence": {
+      "benchmark": "runs/dst-deployment-opt-20261031/benchmark/benchmark.json",
+      "htp_profile": "runs/dst-deployment-opt-20261031/benchmark/htp_profile.jsonl",
+      "saved_windows": "runs/dst-deployment-opt-20261031/test10-candidate-board-qnn-windows.json",
+      "matched_board_cpu_npu": "runs/dst-deployment-opt-20261031/cpu-qnn-matched-first3.json",
+      "repeated_worker": "runs/dst-deployment-opt-20261031/worker-summary.json",
+      "same_host_cpu_old_new": "runs/dst-deployment-opt-20261031/host-cpu-old-new-comparison.json",
+      "report": "runs/dst-deployment-opt-20261031/report.md"
+    }
+  },
+  "qnn": {
+    "context_sha256": "c0ef10b1b14594714dc0e62e3ee9c448e50036b59a8432490b6b60f7243e5453",
+    "metadata": {
+      "ModelMetadataKey.QNN_CONTEXT_BIN_SOC_MODEL": "43",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_BACKEND": "HTP",
+      "ModelMetadataKey.QNN_SDK_VARIANT": "default",
+      "ModelMetadataKey.QAIRT_SDK_VERSION": "2.50.0.260828221209",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_VTCM": "0",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_OPTIMIZATION_LEVEL": "3",
+      "ModelMetadataKey.QNN_MODEL_GRAPH_NAMES": "graph_sjwesfj_",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_HEXAGON_VERSION": "v73"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+schema_version = 1
+
+[project]
+name = "dst-calib-rbt"
+sdk_version = "0.8.0"
+
+[build]
+command = ["bash", "scripts/build_dst_calib.sh"]
+
+[idl]
+sources = ["types"]
+rust = "generated/rust"
+cpp = "generated/cpp"
+descriptor = "generated/descriptor"
+python = "generated/python"
+
+[run]
+startup_timeout_seconds = 30
+shutdown_timeout_seconds = 15
+
+[[component]]
+name = "dst-calib"
+command = [
+  "./build/dst-calib/bin/dst_calib_rbt_node",
+  "--config", "config/dst_calib_rbt/default.yaml",
+  "--out", "runs/dst-calib"
+]

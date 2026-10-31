@@ -1,0 +1,116 @@
+augmentation:
+  axis_weights:
+  - 0.6
+  - 0.2
+  - 0.2
+  rot_range_deg: 5.0
+  trans_range_m: 0.5
+capture:
+  accumulate_sec: 3.0
+  interval_sec: 1.0
+  num_frames: 12
+dar:
+  max_anchors: 400
+  min_anchors: 8
+difference_map:
+  e_tar: 0.1
+inference:
+  both_eva_iters: 3
+  eva_ckpt: runs/train_eva/best.pt
+  eva_iters: 3
+  mode: auto
+loss:
+  a: 0.1
+multiframe:
+  selection_ratio: 0.3
+  weighting: score
+online:
+  camera_frame: camera_color_optical_frame
+  confirmation_rotation_deg: 1.0
+  confirmation_translation_m: 0.05
+  extrinsic_topic: /dst_calib/extrinsic
+  lidar_frame: livox_frame
+  max_final_cd: 0.15
+  max_lidar_points: 120000
+  max_rotation_jump_deg: 5.0
+  max_translation_jump_m: 0.3
+  min_depth_valid_ratio: 0.05
+  min_lidar_points: 1000
+  mode: fast
+  publish_rate_hz: 10.0
+  reanchor_confirmations: 2
+  smoothing_alpha: 0.35
+  status_topic: /dst_calib/status
+  sync_queue_size: 40
+  sync_slop_sec: 0.05
+  window_size: 12
+  window_stride: 4
+  worker_python: ''
+  worker_timeout_sec: 900
+output:
+  runs_dir: runs
+self_supervised:
+  batch_frames: 2
+  chamfer_alpha: 0.5
+  chamfer_beta: 0.5
+  coarse:
+    fov_margin_deg: 12.0
+    iters_per_start: 20
+    lr: 0.03
+    max_frames: 1
+    max_points: 3000
+    pitch_grid_deg:
+    - -15.0
+    - 0.0
+    - 15.0
+    score_trunc: 0.5
+    t_bound: 0.5
+    t_penalty: 10.0
+    voxel: 0.4
+    yaw_grid: 8
+  fov_margin_deg: 8.0
+  per_frame_finetune_iters: 15
+  per_frame_lr: 0.0008
+  seed: 0
+  stages:
+  - iters: 40
+    lr: 0.01
+    max_points: 4000
+    trunc: 2.0
+    voxel: 0.3
+  - iters: 60
+    lr: 0.004
+    max_points: 6000
+    trunc: 0.8
+    voxel: 0.12
+  - iters: 80
+    lr: 0.0015
+    max_points: 10000
+    trunc: 0.3
+    voxel: 0.05
+sensors:
+  camera:
+    color_topic: /camera/color/image_raw
+    depth_max: 7.0
+    depth_min: 0.25
+    depth_topic: /camera/depth/image_raw
+    depth_unit: auto
+    info_topic: /camera/color/camera_info
+  lidar:
+    host_ip: 192.168.1.5
+    lidar_ip: 192.168.1.12
+    max_range: 40.0
+    min_range: 0.1
+    topic: /livox/lidar
+train:
+  arch: sb
+  batch_size: 8
+  block_n: 5
+  epochs: 200
+  lr: 0.0005
+  scheduler: onecycle
+  weight_decay: 0.0001
+virtual_camera:
+  focal: 600.0
+  height: 256
+  width: 512

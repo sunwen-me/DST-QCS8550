@@ -1,0 +1,34 @@
+package dst_calib;
+abi 1;
+
+message Extrinsic {
+    sequence: u64;
+    timestamp_ns: u64;
+    clock_kind: u8;
+    clock_source_id: u8[48];
+    clock_generation: u64;
+    parent_frame: u8[64];
+    child_frame: u8[64];
+    mode: u8[16];
+    status: u32;
+    backend: u32;
+    iteration: u32;
+    reserved: u32;
+    final_cd: f64;
+    rotation_deg: f64[3];
+    translation_m: f64[3];
+    transform_row_major: f64[16];
+}
+
+message Status {
+    sequence: u64;
+    timestamp_ns: u64;
+    state: u32;
+    backend: u32;
+    paired_frames: u32;
+    dropped_frames: u32;
+    rejected_results: u32;
+    running_jobs: u32;
+    final_cd: f64;
+    message: u8[256];
+}

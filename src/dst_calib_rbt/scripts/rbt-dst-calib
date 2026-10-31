@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_path="$(readlink -f -- "${BASH_SOURCE[0]}")"
+workspace_root="${DST_CALIB_WORKSPACE:-$(cd -- "$(dirname -- "$script_path")/../../.." && pwd -P)}"
+sdk_prefix="${RBT_SDK_ROOT:?Set RBT_SDK_ROOT to your RBT SDK 0.8.0 prefix}"
+source "${sdk_prefix}/env.sh"
+export RBT_COMPOSER_ADDR="${RBT_COMPOSER_ADDR:-127.0.0.1:7447}"
+node="${DST_CALIB_NODE:-${workspace_root}/build/dst-calib/bin/dst_calib_rbt_node}"
+config="${DST_CALIB_CONFIG:-${workspace_root}/config/dst_calib_rbt/default.yaml}"
+python_bin="${DST_CALIB_PYTHON:-python3}"
+# Worker/model/config paths in the runtime YAML are workspace-relative.
+cd -- "$workspace_root"
+exec "$node" --config "$config" --python "$python_bin" "$@"

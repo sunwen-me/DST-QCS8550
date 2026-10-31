@@ -1,0 +1,9 @@
+{
+  "checkpoint": "models/dst-calib/deployment-v2/best.pt",
+  "sha256": "b86e84d128759c25b89642df135d588b0fefc70581a4e7c477743d394fb76a44",
+  "selected_by": "development raw 3-step normalized score, val09 only",
+  "source": "full-v2-1152 candidate epoch12",
+  "test_used_for_selection": false,
+  "auto_backend_approved": false,
+  "live_sensor_accuracy_verified": false
+}

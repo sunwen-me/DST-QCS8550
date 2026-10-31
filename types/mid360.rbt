@@ -1,0 +1,36 @@
+package mid360;
+abi 1;
+
+struct CloudHeader {
+    sequence: u64;
+    timestamp_ns: u64;
+    width: u32;
+    reserved: u8[4];
+    frame_id: u8[64];
+}
+
+struct TimedPoint {
+    timestamp_ns: u64;
+    x: f32;
+    y: f32;
+    z: f32;
+    intensity: f32;
+    tag: u8;
+    time_type: u8;
+    reserved: u8[6];
+}
+
+message TimedPointCloud = slice {
+    header CloudHeader;
+    payload TimedPoint[];
+}
+
+message Imu {
+    sequence: u64;
+    timestamp_ns: u64;
+    time_type: u8;
+    reserved: u8[7];
+    frame_id: u8[64];
+    angular_velocity: f32[3];
+    linear_acceleration: f32[3];
+}

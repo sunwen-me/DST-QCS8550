@@ -1,0 +1,3 @@
+{"depth":0,"type":8001,"unit":4,"value":4,"identifier":"Number of HVX threads used"}
+{"depth":0,"type":3001,"unit":1,"value":6554,"identifier":"RPC (execute) time"}
+{"depth":0,"type":3002,"unit":1,"value":6027,"identifier":"QNN accelerator (execute) time"}

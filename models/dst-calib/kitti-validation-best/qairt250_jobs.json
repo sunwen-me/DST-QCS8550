@@ -1,0 +1,22 @@
+{
+  "onnx_sha256": "720ed46dadfea425312a20b15aa35439e7b9f16721868a976e67c8abeffd681b",
+  "compile_job": "jpy27nvrg",
+  "compile_options": "--target_runtime qnn_dlc --qairt_version 2.50",
+  "compile_status": "SUCCESS",
+  "link_job": "jg92x88vp",
+  "link_options": "--qairt_version 2.50",
+  "link_status": "SUCCESS",
+  "context_sha256": "b1d3d4693387c1af71a16c35675aea4fbd8a8f986373493fe3c94b1369f4726c",
+  "context_bytes": 10542928,
+  "target_model_id": "mn7lllx53",
+  "target_metadata": {
+    "ModelMetadataKey.QNN_CONTEXT_BIN_SOC_MODEL": "43",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_BACKEND": "HTP",
+    "ModelMetadataKey.QNN_SDK_VARIANT": "default",
+    "ModelMetadataKey.QAIRT_SDK_VERSION": "2.50.0.260828221209",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_VTCM": "0",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_OPTIMIZATION_LEVEL": "3",
+    "ModelMetadataKey.QNN_MODEL_GRAPH_NAMES": "graph_mw_tisur",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_HEXAGON_VERSION": "v73"
+  }
+}

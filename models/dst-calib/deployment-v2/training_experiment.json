@@ -1,0 +1,42 @@
+{
+  "arguments": {
+    "checkpoint": "runs/dst-deployment-opt-20261031/full-v1/best_candidate.pt",
+    "data_root": "/home/sw/DST/runs/kitti_odometry_2x/prepared",
+    "config": "runs/dst-kitti-checkpoint-smoke-20261031/config.yaml",
+    "out": "runs/dst-deployment-opt-20261031/full-v2-1152",
+    "epochs": 18,
+    "samples_per_frame": 4,
+    "train_per_session": 0,
+    "val_per_session": 0,
+    "batch_size": 8,
+    "workers": 2,
+    "lr": 1e-05,
+    "seed": 20261103,
+    "device": "cuda",
+    "eval_every": 3,
+    "replay_frames": 96,
+    "head_only": false
+  },
+  "baseline_sha256": "6d13f32931e69f8afac236522457b0056500ff10222640099432a36ef477685c",
+  "methodology": "engineering normalized residual loss; not original paper equation16",
+  "sampling": "ceil-stride caps 12000/24000/60000/full; identity/small/medium/large equally sampled",
+  "bn": "running statistics frozen",
+  "test_data_used": false,
+  "auto_backend_approved": false,
+  "live_sensor_accuracy_verified": false,
+  "train_sessions": [
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/00",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/01",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/02",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/03",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/04",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/05",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/06",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/07",
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/train/08"
+  ],
+  "validation_sessions": [
+    "/home/sw/DST/runs/kitti_odometry_2x/prepared/val/09"
+  ],
+  "code_sha256": "c8fa32d9f962505b3363f33adf5f513bffd548611ce8812f9c53dc63710cec0d"
+}

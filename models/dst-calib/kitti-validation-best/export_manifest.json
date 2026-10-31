@@ -1,0 +1,57 @@
+{
+  "checkpoint": "/home/sw/Dev/mid/models/dst-calib/kitti-validation-best/best.pt",
+  "checkpoint_sha256": "749d68d48d7d15e6a0c6416e731f0c2fa52e0ef5c63f63f261a03547672e49dc",
+  "onnx_sha256": "720ed46dadfea425312a20b15aa35439e7b9f16721868a976e67c8abeffd681b",
+  "virtual_camera": {
+    "height": 256,
+    "width": 512,
+    "focal": 600.0
+  },
+  "input": {
+    "name": "diff_map",
+    "shape": [
+      1,
+      3,
+      256,
+      512
+    ],
+    "layout": "NCHW",
+    "dtype": "float32"
+  },
+  "output": {
+    "name": "xi",
+    "shape": [
+      1,
+      6
+    ],
+    "units": "axis-angle radians, translation meters"
+  },
+  "export_change": "exact separable adaptive-average bins; no retraining",
+  "pytorch_onnx_max_abs_errors": [
+    2.9802322387695312e-08,
+    1.862645149230957e-08,
+    1.2665987014770508e-07
+  ],
+  "sample_count": 3,
+  "qnn": {
+    "context_sha256": "b1d3d4693387c1af71a16c35675aea4fbd8a8f986373493fe3c94b1369f4726c",
+    "metadata": {
+      "ModelMetadataKey.QNN_CONTEXT_BIN_SOC_MODEL": "43",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_BACKEND": "HTP",
+      "ModelMetadataKey.QNN_SDK_VARIANT": "default",
+      "ModelMetadataKey.QAIRT_SDK_VERSION": "2.50.0.260828221209",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_VTCM": "0",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_OPTIMIZATION_LEVEL": "3",
+      "ModelMetadataKey.QNN_MODEL_GRAPH_NAMES": "graph_mw_tisur",
+      "ModelMetadataKey.QNN_CONTEXT_BIN_HEXAGON_VERSION": "v73"
+    }
+  },
+  "pipeline_validation": {
+    "auto_backend_approved": false,
+    "htp_execution_verified": true,
+    "single_step_parity": "three original samples and sixteen trajectory inputs; mixed precision numerical deltas recorded",
+    "full_fast_status": "runs successfully, but iterative projection and top-1 selection amplify differences; not CPU-equivalent",
+    "evidence": "runs/dst-qnn-validation-20261031/",
+    "live_sensor_accuracy_verified": false
+  }
+}

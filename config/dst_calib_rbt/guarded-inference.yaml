@@ -1,0 +1,121 @@
+sensors:
+  lidar:
+    topic: /livox/lidar
+    lidar_ip: 192.168.1.12
+    host_ip: 192.168.1.5
+    min_range: 0.1
+    max_range: 40.0
+  camera:
+    color_topic: /camera/color/image_raw
+    depth_topic: /camera/depth/image_raw
+    info_topic: /camera/color/camera_info
+    depth_min: 0.25
+    depth_max: 6.0
+    depth_unit: auto
+capture:
+  num_frames: 12
+  accumulate_sec: 3.0
+  interval_sec: 1.0
+virtual_camera:
+  height: 256
+  width: 512
+  focal: 600.0
+difference_map:
+  e_tar: 0.1
+dar:
+  max_anchors: 400
+  min_anchors: 8
+self_supervised:
+  coarse:
+    yaw_grid: 12
+    pitch_grid_deg:
+    - -20
+    - 0
+    - 20
+    voxel: 0.4
+    iters_per_start: 40
+    lr: 0.03
+    max_points: 4000
+    t_bound: 0.5
+    t_penalty: 10.0
+    fov_margin_deg: 12.0
+    score_trunc: 0.5
+  stages:
+  - voxel: 0.3
+    iters: 150
+    lr: 0.01
+    trunc: 2.0
+    max_points: 8000
+  - voxel: 0.12
+    iters: 200
+    lr: 0.004
+    trunc: 0.8
+    max_points: 15000
+  - voxel: 0.05
+    iters: 250
+    lr: 0.0015
+    trunc: 0.3
+    max_points: 25000
+  per_frame_finetune_iters: 40
+  per_frame_lr: 0.0008
+  fov_margin_deg: 8.0
+  batch_frames: 2
+  chamfer_alpha: 0.5
+  chamfer_beta: 0.5
+  seed: 0
+multiframe:
+  selection_ratio: 0.3
+  weighting: score
+loss:
+  a: 0.1
+inference:
+  mode: auto
+  eva_ckpt: runs/train_eva/best.pt
+  eva_iters: 3
+  both_eva_iters: 3
+  stability_guard:
+    enabled: true
+    max_points: 2048
+    voxel: 0.1
+    trunc: 0.3
+    min_relative_improvement: 0.01
+online:
+  mode: fast
+  window_size: 12
+  window_stride: 4
+  sync_slop_sec: 0.05
+  sync_queue_size: 40
+  min_lidar_points: 1000
+  max_lidar_points: 120000
+  min_depth_valid_ratio: 0.05
+  worker_python: ''
+  worker_timeout_sec: 900
+  publish_rate_hz: 10.0
+  camera_frame: camera_color_optical_frame
+  lidar_frame: livox_frame
+  extrinsic_topic: /dst_calib/extrinsic
+  status_topic: /dst_calib/status
+  max_final_cd: 0.15
+  max_rotation_jump_deg: 5.0
+  max_translation_jump_m: 0.3
+  smoothing_alpha: 0.35
+  reanchor_confirmations: 2
+  confirmation_rotation_deg: 1.0
+  confirmation_translation_m: 0.05
+train:
+  lr: 0.0005
+  weight_decay: 0.0001
+  epochs: 200
+  batch_size: 8
+  scheduler: onecycle
+  arch: sb
+  block_n: 5
+augmentation:
+  rot_range_deg: 5.0
+  trans_range_m: 0.5
+  axis_weights:
+  - 0.6
+  - 0.2
+  - 0.2
+output:
+  runs_dir: runs

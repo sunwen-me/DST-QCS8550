@@ -1,0 +1,26 @@
+{
+  "checkpoint_source": "/home/sw/DST/runs/kitti_verification/train_1152_seed1/best.pt",
+  "selected_by": "minimum stored validation total loss among nine candidates, not test ranking",
+  "validation_loss": 333.4690284729004,
+  "validation": {
+    "total": 333.4690284729004,
+    "rgt": 0.028857275222738583,
+    "tgt": 0.12307578014830749,
+    "cloud": 333.3170967102051,
+    "samples": 96,
+    "rotation_mean_deg": 0.5493381819687784,
+    "rotation_median_deg": 0.512347936630249,
+    "translation_mean_m": 0.12102942452474963,
+    "translation_median_m": 0.10560742020606995,
+    "initial_rotation_mean_deg": 1.7818334127465885,
+    "initial_translation_mean_m": 0.17787268039925644
+  },
+  "epoch": 49,
+  "virtual_camera": {
+    "height": 256,
+    "width": 512,
+    "focal": 600.0
+  },
+  "sha256": "749d68d48d7d15e6a0c6416e731f0c2fa52e0ef5c63f63f261a03547672e49dc",
+  "deployment_status": "Actual board HTP verified; explicit experimental backend only; not approved for automatic/live deployment"
+}

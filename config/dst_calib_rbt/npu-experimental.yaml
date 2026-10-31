@@ -1,0 +1,33 @@
+component_id: dst-calib-npu-test
+lidar_capability: Mid360PointCloud
+depth_capability: rbt.orbbec.Depth@1
+camera_info_capability: rbt.orbbec.CameraInfo@1
+frames:
+  parent: camera_color_optical_frame
+  child: livox_frame
+pairing:
+  max_skew_ns: 50000000
+  window_size: 12
+  window_stride: 4
+  max_lidar_points: 12000
+  min_lidar_points: 64
+  depth_min_m: 0.25
+  depth_max_m: 6.0
+worker:
+  python: python3
+  mode: fast
+  backend: qnn
+  script: src/dst_calib_rbt/scripts/dst_worker.py
+  config: src/dst_calib_rbt/python/default.yaml
+  eva_onnx: models/dst-calib/deployment-v2/eva_sb.onnx
+  eva_ckpt: models/dst-calib/kitti-validation-best/best.pt
+  qnn_context: models/dst-calib/kitti-validation-best/eva_sb_qairt250.bin
+  qnn_runtime: runtime/qairt250
+  qnn_library: build/dst-calib/lib/libdst_qnn.so
+  qnn_manifest: models/dst-calib/kitti-validation-best/export_manifest.json
+  init_yaml: ''
+  max_jobs: 1
+output:
+  directory: runs/dst-calib-npu-experimental
+  max_final_cd: 0.15
+  publish_results: false

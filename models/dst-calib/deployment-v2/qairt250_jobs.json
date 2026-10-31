@@ -1,0 +1,22 @@
+{
+  "onnx_sha256": "480011245a63bba106f8b7fe70833dbcdc7b1ae90186a970545b07d519046b8b",
+  "compile_job": "j56mdw2yp",
+  "compile_options": "--target_runtime qnn_dlc --qairt_version 2.50",
+  "compile_status": "SUCCESS",
+  "link_job": "jpexlyovg",
+  "link_options": "--qairt_version 2.50",
+  "link_status": "SUCCESS",
+  "context_sha256": "c0ef10b1b14594714dc0e62e3ee9c448e50036b59a8432490b6b60f7243e5453",
+  "context_bytes": 10542928,
+  "target_model_id": "mq3eeek03",
+  "target_metadata": {
+    "ModelMetadataKey.QNN_CONTEXT_BIN_SOC_MODEL": "43",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_BACKEND": "HTP",
+    "ModelMetadataKey.QNN_SDK_VARIANT": "default",
+    "ModelMetadataKey.QAIRT_SDK_VERSION": "2.50.0.260828221209",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_VTCM": "0",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_OPTIMIZATION_LEVEL": "3",
+    "ModelMetadataKey.QNN_MODEL_GRAPH_NAMES": "graph_sjwesfj_",
+    "ModelMetadataKey.QNN_CONTEXT_BIN_HEXAGON_VERSION": "v73"
+  }
+}

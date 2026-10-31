@@ -1,0 +1,40 @@
+{
+  "source_experiment": "/home/sw/DST/runs/train_eva_kitti_2x",
+  "selected_checkpoint": "model_final.pt",
+  "selection_reason": "User-preferred 1152-frame experiment, fixed-final-step main analysis; not selected on test performance",
+  "artifacts": [
+    {
+      "filename": "model_final.pt",
+      "source": "/home/sw/DST/runs/train_eva_kitti_2x/model_final.pt",
+      "sha256": "864dabf7092742b70630a2af2adedee4fd255c1c9abdacb402019022f494bf78",
+      "bytes": 20030632,
+      "metadata": {
+        "arch": "sb",
+        "epoch": 50,
+        "virtual_camera": {
+          "height": 256,
+          "width": 512,
+          "focal": 600.0
+        }
+      }
+    },
+    {
+      "filename": "best.pt",
+      "source": "/home/sw/DST/runs/train_eva_kitti_2x/best.pt",
+      "sha256": "1604ec06b759a0ef5a2fc9241befb69b3ceb8c1213622ac9e7bcbfa5be14a3a7",
+      "bytes": 20029721,
+      "metadata": {
+        "arch": "sb",
+        "epoch": 47,
+        "selection": "validation",
+        "virtual_camera": {
+          "height": 256,
+          "width": 512,
+          "focal": 600.0
+        }
+      }
+    }
+  ],
+  "scope": "KITTI-trained candidate; Mid360/Gemini live generalization and NPU execution unvalidated",
+  "runtime_default_mode": "selfsup unchanged"
+}

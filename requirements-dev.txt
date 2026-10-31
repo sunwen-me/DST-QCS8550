@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest>=7.4
+onnx>=1.15
+onnxruntime>=1.17
+opencv-python-headless>=4.8
