@@ -1,26 +1,27 @@
-# 来源与权利状态
+# 来源与许可
 
-仅抽取 DST 算法和 RBT/QNN 适配，源项目 https://github.com/sunwen-me/DST ，
-基线 commit 917cf8013324eef60782d7496dea59aba7824808。关联论文 https://arxiv.org/abs/2601.01188 。
-这是用户自己的 AI 辅助复现，不是论文作者官方实现；论文不等于代码授权。
+## 源码
 
-本次核对上游 GitHub license 字段为空，本地未发现上游 LICENSE。
-本次不臆造 MIT/GPL、不替第三方再许可、不宣称所有内容已获无限制授权。
-新增工程代码也暂未指定统一开源许可证。需要明确的修改、再分发和商业授权时，
-应由权利人确定源码与模型许可。依赖库仍遵守各自许可证。
+本仓库基于 [sunwen-me/DST](https://github.com/sunwen-me/DST)，
+基线 commit 为 `917cf8013324eef60782d7496dea59aba7824808`，包含 DST 算法及 RBT/QNN 适配。
+算法参考[论文](https://arxiv.org/abs/2601.01188)，属于独立复现，非论文作者官方实现。
+
+截至 2026-10-31，上游仓库未附 LICENSE，本仓库也暂未指定统一源码或模型许可证。
+修改、再分发和商业使用的授权范围需向相应权利人确认；第三方依赖按各自许可证使用。
 
 ## 模型与数据
 
-models/dst-calib 是本项目现有训练、工程微调与导出产物，不是论文官方权重。
-kitti-1152-seed0、kitti-validation-best 使用 KITTI 抽样训练；deployment-v2 为旧候选继续微调。
-元数据保存在对应目录，不附 KITTI 原始样本。KITTI 使用条款由使用者自行阅读遵守：
-https://www.cvlibs.net/datasets/kitti/ 。本仓库不替 KITTI 权利人授予许可，
-公开状态不能说明数据/衍生模型可用于任意商业用途，确定模型授权时还需核对训练数据限制。
+`models/dst-calib` 保存本项目训练、微调和导出的模型：
 
-QNN context 是本项目模型编译产物，不包含 QNN/QAIRT 头文件、运行库和 DSP 固件。
-高通工具链及编译产物仍受对应协议约束。RBT SDK 同样由用户自行合法获取。
-examples/synthetic 只含人工合成几何，不含 KITTI 图像/点云。
+- `kitti-1152-seed0`、`kitti-validation-best`：使用 KITTI 抽样数据训练。
+- `deployment-v2`：在已有模型上继续进行工程微调。
 
-历史实验 JSON 保留本地路径、固定种子、云编译 job ID 与 SHA256 供溯源，
-不是密钥和运行要求。未附 SSH 配置、访问令牌或真实设备先验。
-未经独立验证，不用于安全关键在线外参替换。
+训练元数据保存在各模型目录。KITTI 数据需按[数据集使用条款](https://www.cvlibs.net/datasets/kitti/)
+另行获取，模型使用和分发也需考虑训练数据的相关限制。`examples/synthetic` 为人工合成数据。
+
+## SDK 与运行环境
+
+QNN context 为本项目模型的编译产物。QNN/QAIRT 头文件、运行库、DSP 固件及 RBT SDK 需另行获取，
+按各自协议使用。仓库不附这些 SDK，也不附 KITTI 原始数据、传感器日志、真实设备先验或访问凭据。
+
+实验 JSON 中的本地路径、固定种子、云编译 job ID 和 SHA256 用于记录模型来源与实验过程。

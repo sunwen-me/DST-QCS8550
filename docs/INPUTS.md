@@ -1,19 +1,24 @@
 # 输入与保存窗口
 
-- LiDAR 点云 XYZ 米，RBT 使用 Mid360PointCloud 合约。
-- Depth16 必须对齐 Color CameraInfo 尺寸，header unit_scale 换算米。
-- 必须真实同步，RBT 使用 HostMonotonic，不混用设备/系统时间。
-- 不附驱动，provider 匹配 types/mid360.rbt 和 types/orbbec.rbt。
-- 按实际相机设深度范围，不将 KITTI 1–60m 用于室内 Gemini。
-- 不得用同帧 LiDAR 投影伪装成独立深度来证明标定精度。
+## 传感器输入
 
-T_cam_lidar 为4×4，p_camera = T_cam_lidar @ p_lidar，平移米。
-先验 YAML 可包含 T_cam_lidar 矩阵，旋转正交且det为正。
-synthetic truth 不是任何真实机器人先验。
+- LiDAR 点云为 XYZ，单位米；RBT 使用 `Mid360PointCloud` 合约。
+- `Depth16` 对齐 Color `CameraInfo` 的图像尺寸，通过 header 的 `unit_scale` 换算为米。
+- 点云与深度需同步，RBT 时间戳统一使用 `HostMonotonic`。
+- 传感器驱动由 provider 提供，接口见 `types/mid360.rbt` 和 `types/orbbec.rbt`。
+- 深度范围按设备设置：KITTI 示例为 1–60 m，Gemini 配置为 0.25–6 m。
+- 标定精度验证使用独立相机深度或外参参考；同帧 LiDAR 投影只用于几何链路测试。
+
+## 坐标约定
+
+`T_cam_lidar` 为 4×4 矩阵，方向为 `p_camera = T_cam_lidar @ p_lidar`，平移单位米。
+先验 YAML 可包含 `T_cam_lidar` 矩阵，旋转部分需正交且行列式为正。
+真实设备先验由测量或独立标定获取，`examples/synthetic/truth.yaml` 对应合成示例。
 
 ## DSTWIN01：little-endian，version 1
 
-RBT 保存，Python codec 为 src/dst_calib_rbt/scripts/dst_worker.py::read_window。
+RBT 保存此格式的窗口，Python 读取入口为
+`src/dst_calib_rbt/scripts/dst_worker.py::read_window`。
 
 | 字段 | 类型 |
 |---|---|
@@ -26,6 +31,6 @@ RBT 保存，Python codec 为 src/dst_calib_rbt/scripts/dst_worker.py::read_wind
 | 每帧depth_count | uint32，等于width×height |
 | 每帧depth | float32，row-major，米 |
 
-全窗口共用内参与尺寸，points在LiDAR frame，depth在camera frame。
-读取器检查magic/version、截断、尺寸和焦距。仅打开可信、大小受控的输入。
-合成窗口用于可移植回归，不是实机准确率证据。
+全窗口共用内参与尺寸，points 位于 LiDAR 坐标系，depth 位于 camera 坐标系。
+读取器检查 magic/version、文件截断、尺寸和焦距；输入文件应来自可信来源且大小受控。
+合成窗口用于跨平台回归，实机精度验证需另行采集同步数据。
