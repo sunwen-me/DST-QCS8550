@@ -55,6 +55,7 @@ struct Options {
     std::string output_directory = "runs/dst-calib";
     double max_final_cd = 0.15;
     bool publish_results = false;
+    bool capture_only = false;
 };
 
 Options load_options(const std::string& path, const std::string& override_id = {});

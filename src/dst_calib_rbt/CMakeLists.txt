@@ -40,6 +40,10 @@ if(BUILD_TESTING)
         COMMAND dst_calib_rbt_node --config "${MID_WORKSPACE_DIR}/config/dst_calib_rbt/default.yaml"
         --check-config)
     set_tests_properties(dst_calib_rbt_config PROPERTIES TIMEOUT 10)
+    add_test(NAME dst_calib_capture_config
+        COMMAND dst_calib_rbt_node --config "${MID_WORKSPACE_DIR}/config/dst_calib_rbt/default.yaml"
+        --capture-only --check-config)
+    set_tests_properties(dst_calib_capture_config PROPERTIES TIMEOUT 10)
     add_test(NAME dst_calib_rbt_npu_experimental_config
         COMMAND dst_calib_rbt_node --config "${MID_WORKSPACE_DIR}/config/dst_calib_rbt/npu-experimental.yaml"
         --check-config)

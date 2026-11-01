@@ -15,6 +15,23 @@
 先验 YAML 可包含 `T_cam_lidar` 矩阵，旋转部分需正交且行列式为正。
 真实设备先验由测量或独立标定获取，`examples/synthetic/truth.yaml` 对应合成示例。
 
+## 采集标定窗口
+
+传感器 provider 启动后，可以只保存窗口，再离线求解：
+
+```bash
+./build/dst-calib/bin/dst_calib_rbt_node \
+  --config /path/to/capture.yaml --capture-only --out runs/my-capture
+```
+
+每个 `job_N` 目录保存 `window.bin` 与 `capture.yaml`。后者记录点云和深度各自的
+HostMonotonic 时间戳、配对时间差与点数。结束采集时按 Ctrl+C。
+`--capture-only` 跳过模型推理和外参发布，输出目录应为本次采集新建。
+
+有多台相机时，配置 `depth_capability` 和 `camera_info_capability` 的 namespace，
+例如 Gemini2 胸部相机可使用 `chest/rbt.orbbec.Depth@1` 与 `chest/rbt.orbbec.CameraInfo@1`。
+两项必须来自同一相机 provider 的同一次 activation。
+
 ## DSTWIN01：little-endian，version 1
 
 RBT 保存此格式的窗口，Python 读取入口为

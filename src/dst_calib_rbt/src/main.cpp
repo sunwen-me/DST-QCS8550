@@ -70,6 +70,8 @@ struct DepthPacket {
 
 struct Frame {
     std::uint64_t timestamp_ns = 0;
+    std::uint64_t lidar_timestamp_ns = 0;
+    std::uint64_t depth_timestamp_ns = 0;
     std::vector<std::array<float, 3>> points;
     std::uint32_t width = 0;
     std::uint32_t height = 0;
@@ -345,6 +347,8 @@ void pair_queues(Pending& pending, const Options& options, const CameraModel& ca
         }
         Frame frame;
         frame.timestamp_ns = (lidar_it->timestamp_ns + depth_it->timestamp_ns) / 2;
+        frame.lidar_timestamp_ns = lidar_it->timestamp_ns;
+        frame.depth_timestamp_ns = depth_it->timestamp_ns;
         frame.points = std::move(lidar_it->points);
         frame.width = depth_it->width;
         frame.height = depth_it->height;
@@ -392,10 +396,17 @@ public:
         try {
             auto lidar = take(context.require<LidarInput>("lidar").slice_subscriber<
                 mid360::CloudHeader, mid360::TimedPoint>(), "open Mid360 subscriber");
-            auto depth = take(context.require<DepthInput>("depth").slice_subscriber<std::uint64_t, std::uint8_t>(),
+            const auto depth_binding = context.require<void>("depth");
+            auto depth = take(depth_binding.slice_subscriber<std::uint64_t, std::uint8_t>(),
                               "open depth subscriber");
-            const auto camera_binding = context.require<CameraInfoInput>("camera_info");
+            const auto camera_binding = context.require<void>("camera_info");
             if (!camera_binding) return rbt::Result<void>::failure("missing CameraInfo capability");
+            const auto& depth_descriptor = depth_binding.binding().descriptor;
+            const auto& camera_descriptor_binding = camera_binding.binding().descriptor;
+            if (depth_descriptor.provider_component != camera_descriptor_binding.provider_component ||
+                depth_descriptor.provider_process != camera_descriptor_binding.provider_process ||
+                depth_descriptor.activation != camera_descriptor_binding.activation)
+                throw std::runtime_error("depth and CameraInfo must come from the same camera activation");
 
             using CameraInfoRpc = rbt::RpcClient<rbt::orbbec::CameraInfoRequest,
                                                  rbt::orbbec::CameraInfoResponse>;
@@ -554,6 +565,43 @@ public:
                             }
                             publish_status(2U, 1U, "worker running");
                             try {
+                                if (options.capture_only) {
+                                    const auto directory = std::filesystem::path(options.output_directory) /
+                                        ("job_" + std::to_string(job.sequence));
+                                    std::filesystem::create_directories(directory);
+                                    const auto path = directory / "window.bin";
+                                    if (std::filesystem::exists(path))
+                                        throw std::runtime_error("capture output already exists: " + path.string());
+                                    write_window(path, job.snapshot);
+                                    YAML::Emitter metadata;
+                                    metadata << YAML::BeginMap << YAML::Key << "clock" << YAML::Value << "HostMonotonic"
+                                             << YAML::Key << "camera_frame" << YAML::Value << options.parent_frame
+                                             << YAML::Key << "lidar_frame" << YAML::Value << options.child_frame
+                                             << YAML::Key << "frames" << YAML::Value << YAML::BeginSeq;
+                                    for (const auto& frame : job.snapshot.frames) {
+                                        const auto skew = frame.lidar_timestamp_ns > frame.depth_timestamp_ns
+                                            ? frame.lidar_timestamp_ns - frame.depth_timestamp_ns
+                                            : frame.depth_timestamp_ns - frame.lidar_timestamp_ns;
+                                        metadata << YAML::BeginMap
+                                                 << YAML::Key << "timestamp_ns" << YAML::Value << frame.timestamp_ns
+                                                 << YAML::Key << "lidar_timestamp_ns" << YAML::Value << frame.lidar_timestamp_ns
+                                                 << YAML::Key << "depth_timestamp_ns" << YAML::Value << frame.depth_timestamp_ns
+                                                 << YAML::Key << "skew_ns" << YAML::Value << skew
+                                                 << YAML::Key << "points" << YAML::Value << frame.points.size()
+                                                 << YAML::EndMap;
+                                    }
+                                    metadata << YAML::EndSeq << YAML::EndMap;
+                                    std::ofstream sidecar(directory / "capture.yaml");
+                                    sidecar << metadata.c_str() << '\n';
+                                    if (!sidecar) throw std::runtime_error("capture metadata write failed");
+                                    {
+                                        std::lock_guard lock(pending->mutex);
+                                        pending->running = false;
+                                    }
+                                    publish_status(3U, 1U, "sensor window captured");
+                                    std::cout << "DST captured=" << path << std::endl;
+                                    continue;
+                                }
                                 const auto result_path = run_worker(options, job.snapshot, job.sequence);
                                 const auto result = read_result(result_path);
                                 check_transform(result.transform);
@@ -659,15 +707,17 @@ int main(int argc, char** argv) {
         std::string output_directory;
         std::string init_yaml;
         bool check_only = false;
+        bool capture_only = false;
         for (int i = 1; i < argc; ++i) {
             const std::string_view argument(argv[i]);
             if (argument == "--help" || argument == "-h") {
                 std::cout << "dst_calib_rbt_node --config FILE [--component-id ID]"
                           << " [--mode selfsup|fast|both] [--backend auto|qnn|cpu]"
-                          << " [--python FILE] [--init-yaml FILE] [--out DIR] [--check-config]\n";
+                          << " [--python FILE] [--init-yaml FILE] [--out DIR] [--capture-only] [--check-config]\n";
                 return 0;
             }
             if (argument == "--check-config") { check_only = true; continue; }
+            if (argument == "--capture-only") { capture_only = true; continue; }
             if (argument != "--config" && argument != "--component-id" && argument != "--mode"
                 && argument != "--backend" && argument != "--python" && argument != "--out"
                 && argument != "--init-yaml")
@@ -687,6 +737,8 @@ int main(int argc, char** argv) {
         if (!options_python.empty()) options.python = options_python;
         if (!output_directory.empty()) options.output_directory = output_directory;
         if (!init_yaml.empty()) options.init_yaml = init_yaml;
+        options.capture_only = capture_only;
+        if (options.capture_only) options.publish_results = false;
         dst_calib_rbt::validate_options(options);
         if (check_only) {
             std::cout << "DST-RBT configuration OK mode=" << options.mode
