@@ -394,7 +394,7 @@ public:
 
     rbt::Result<void> activate(rbt::ActivationContext& context) override {
         try {
-            auto lidar = take(context.require<LidarInput>("lidar").slice_subscriber<
+            auto lidar = take(context.require<void>("lidar").slice_subscriber<
                 mid360::CloudHeader, mid360::TimedPoint>(), "open Mid360 subscriber");
             const auto depth_binding = context.require<void>("depth");
             auto depth = take(depth_binding.slice_subscriber<std::uint64_t, std::uint8_t>(),
